@@ -1,6 +1,9 @@
+import { Subject } from 'rxjs/RX';
+import { IEvent } from '../event.model';
+
 export class EventsService {
 
-  private EVENTS = [
+  private EVENTS: Array<any> =  [
     {
       id: 1,
       name: 'Angular Connect',
@@ -310,11 +313,13 @@ export class EventsService {
       ]
     }
   ];
-  getEvents(): Array<any> {
-    return this.EVENTS;
+  getEvents(): Subject<any> {
+    const subject = new Subject();
+    setTimeout(() => {subject.next(this.EVENTS); subject.complete(); }, 100);
+    return subject;
   }
 
-  getEvent(id: number): any {
+  getEvent(id: number): IEvent {
     return this.EVENTS.find(event => event.id === id);
   }
 }
