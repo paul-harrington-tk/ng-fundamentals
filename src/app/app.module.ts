@@ -16,12 +16,14 @@ import { Error404Component } from './errors/404.component';
 import { EventRouteActivator } from './events/event-details/events-route-activator.component';
 import { SessionListComponent } from './events/event-details/session-list.component';
 import { AuthService } from './user/auth.service';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    FormsModule
   ],
   declarations: [
     EventsAppComponent,
