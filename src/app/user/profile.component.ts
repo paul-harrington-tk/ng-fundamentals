@@ -24,8 +24,8 @@ export class ProfileComponent implements OnInit {
             this.router.navigate(['/user/login']);
             return;
         }
-        let firstName = new FormControl(this.authService.currentUser.name, Validators.required);
-        let lastName = new FormControl(this.authService.currentUser.surname, Validators.required);
+        let firstName = new FormControl(this.authService.currentUser.name, [Validators.required, Validators.pattern('[a-zA-Z].*')]);
+        let lastName = new FormControl(this.authService.currentUser.surname, [Validators.required, Validators.pattern('[a-zA-Z].*')]);
 
         this.profileForm = new FormGroup({
             firstName: firstName,
@@ -34,10 +34,10 @@ export class ProfileComponent implements OnInit {
     }
 
     validateFirstName(): boolean {
-        return this.profileForm.controls.firstName.valid && this. profileForm.controls.firstName.untouched;
+        return this.profileForm.controls.firstName.valid || this. profileForm.controls.firstName.untouched;
     }
     validateLastName(): boolean {
-       return this.profileForm.controls.lastName.valid && this.profileForm.controls.lastName.untouched;
+       return this.profileForm.controls.lastName.valid || this.profileForm.controls.lastName.untouched;
     }
     saveProfile(formValues) {
         if (this.profileForm.valid) {
