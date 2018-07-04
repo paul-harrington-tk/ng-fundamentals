@@ -16,14 +16,16 @@ import { Error404Component } from './errors/404.component';
 import { EventRouteActivator } from './events/event-details/events-route-activator.component';
 import { SessionListComponent } from './events/event-details/session-list.component';
 import { AuthService } from './user/auth.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CreateSessionComponent } from './events/event-details/create-session.component';
 
 
 @NgModule({
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     EventsAppComponent,
@@ -33,6 +35,7 @@ import { FormsModule } from '@angular/forms';
     SessionListComponent,
     NavBarComponent,
     CreateEventComponent,
+    CreateSessionComponent,
     Error404Component
   ],
   providers: [
