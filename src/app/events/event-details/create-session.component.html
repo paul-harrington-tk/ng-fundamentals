@@ -20,9 +20,9 @@
         id="presenter" type="text" class="form-control" placeholder="presenter..." 
         />
       </div>
-      <div class="form-group" [ngClass]="{ 'error': duration?.invalid && duration?.dirty }">
+      <div class="form-group" [ngClass]="{ 'error': durationInvalid()}">
         <label for="duration">Duration:</label>
-        <em *ngIf="duration.invalid && (duration.dirty || duration.touched)">Required</em>
+        <em *ngIf="durationInvalid()">Required</em>
         <select formControlName="duration" class="form-control">
           <option value="">select duration...</option>
           <option value="1">Half Hour</option>
@@ -31,9 +31,9 @@
           <option value="4">Full Day</option>
         </select>
       </div>
-      <div class="form-group" [ngClass]="{ 'error': level?.invalid && level?.dirty }">
+      <div class="form-group" [ngClass]="{'error': levelInvalid()}">
         <label for="level">Level:</label>
-        <em *ngIf="level.invalid && (level.dirty || level.touched)">Required</em>
+        <em *ngIf="levelInvalid()">Required</em>
         <select formControlName="level" class="form-control">
           <option value="">select level...</option>
           <option value="Beginner">Beginner</option>
@@ -41,10 +41,11 @@
           <option value="Advanced">Advanced</option>
         </select>
       </div>
-      <div class="form-group" [ngClass]="{ 'error': abstract?.invalid && abstract?.dirty }">
+      <div class="form-group" [ngClass]="{ 'error': abstract?.invalid && (abstract?.dirty || abstract?.touched) }">
         <label for="abstract">Abstract:</label>
         <em *ngIf="abstract?.invalid && (abstract?.dirty || abstract?.touched) && abstract?.errors.required">Required</em>
         <em *ngIf="abstract?.invalid && (abstract?.dirty || abstract?.touched) && abstract?.errors.maxlength">Cannot exceed 400 Characters</em>
+        <em *ngIf="abstract?.invalid && (abstract?.dirty || abstract?.touched) && abstract?.errors.restrictedWords">Restricted words found: {{abstract?.errors.restrictedWords}}</em>
         <textarea formControlName="abstract" 
         id="abstract" 
         rows=3 

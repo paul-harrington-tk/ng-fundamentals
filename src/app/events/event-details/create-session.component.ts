@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl, Validators, FormGroup } from "@angular/forms";
 import { ISession } from "../event.model";
+import { restrictedWords} from '../shared/restricted-words.validator';
 
 @Component({
     templateUrl: './create-session.component.html',
@@ -20,12 +21,13 @@ export class CreateSessionComponent implements OnInit {
     level: FormControl;
     abstract: FormControl;
     newSessionForm: FormGroup;
+
     ngOnInit() {
         this.name = new FormControl('', Validators.required);
         this.presenter = new FormControl('', Validators.required);
         this.duration = new FormControl('', Validators.required);
         this.level = new FormControl('', Validators.required);
-        this.abstract = new FormControl('', [Validators.required, Validators.maxLength(400), this.restrictedWords]);
+        this.abstract = new FormControl('', [Validators.required, Validators.maxLength(400), restrictedWords(['foo', 'bar'])]);
         this.newSessionForm = new FormGroup({
             name: this.name,
             presenter: this.presenter,
@@ -37,14 +39,24 @@ export class CreateSessionComponent implements OnInit {
     presenterInvalid(): boolean {
         return this.presenter.invalid && (this.presenter.dirty || this.presenter.touched)
     }
-    nameInvalid() : boolean {
+    nameInvalid(): boolean {
         return this.name.invalid && (this.name.dirty || this.name.touched)
     }
-    private restrictedWords(control: FormControl): {[key:string]: any} {
-        return control.value.includes('foo') ? {'restrictedWords': 'foo'} : null;
+
+    levelInvalid(): boolean {
+        return this.level.invalid && (this.level.dirty || this.level.touched);
     }
+
+    durationInvalid(): boolean {
+        return this.duration.invalid && (this.duration.dirty || this.duration.touched);
+    }
+
+    abstractInvalid(): boolean {
+        return this.abstract.invalid && (this.abstract.dirty || this.abstract.touched);
+    }
+   
     saveSession(formValues) {
-        let session:ISession = {
+        let session: ISession = {
             id: undefined,
             name: formValues.name,
             presenter: formValues.presenter,
