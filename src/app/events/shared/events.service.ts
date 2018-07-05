@@ -1,9 +1,11 @@
 import { Subject } from 'rxjs/RX';
-import { IEvent } from '../event.model';
+import { IEvent, ISession } from '../event.model';
+import { EventEmitter } from '@angular/core';
 
 export class EventsService {
 
-  private EVENTS: Array<any> =  [
+
+  private EVENTS: Array<any> = [
     {
       id: 1,
       name: 'Angular Connect',
@@ -315,7 +317,7 @@ export class EventsService {
   ];
   getEvents(): Subject<any> {
     const subject = new Subject();
-    setTimeout(() => {subject.next(this.EVENTS); subject.complete(); }, 100);
+    setTimeout(() => { subject.next(this.EVENTS); subject.complete(); }, 100);
     return subject;
   }
 
@@ -323,7 +325,7 @@ export class EventsService {
     return this.EVENTS.find(event => event.id === id);
   }
   saveEvent(event: IEvent) {
-    let id = this.EVENTS.sort((a,b) => {
+    let id = this.EVENTS.sort((a, b) => {
       if (a.id > b.id) return -1
       else if (b.id > a.id) return 1
       else return 0;
@@ -336,5 +338,27 @@ export class EventsService {
   updateEvent(event: IEvent) {
     let index = this.EVENTS.findIndex(x => x.id === event.id);
     this.EVENTS[index] = event;
+  }
+
+  searchSessions(searchTerm: string) {
+    let term = searchTerm.toLocaleLowerCase();
+
+    let results: ISession[] = [];
+
+    this.EVENTS.forEach(e => {
+      let matchingSessions = e.sessions.filter(s => s.name.toLocaleLowerCase().indexOf(term) > -1);
+      matchingSessions = matchingSessions.map((session: any) => {
+        session.eventId = e.id
+        return session;
+      });
+      results = results.concat(matchingSessions);
+    });
+
+    var emitter = new EventEmitter(true);
+    setTimeout(() => {
+      emitter.emit(results);
+    }, 100);
+
+    return emitter;
   }
 }
