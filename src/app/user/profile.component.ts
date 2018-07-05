@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
     profileForm: FormGroup;
-    constructor(private authService: AuthService, private router: Router) {
+    constructor(private authService: AuthService, private router: Router, ) {
 
     }
     ngOnInit() {
@@ -42,7 +42,6 @@ export class ProfileComponent implements OnInit {
     saveProfile(formValues) {
         if (this.profileForm.valid) {
             this.authService.updateCurrentUser(formValues.firstName, formValues.lastName);
-            this.router.navigate(['/events']);
         }
     }
     cancel() {
