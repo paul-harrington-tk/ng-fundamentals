@@ -44,6 +44,6 @@
 
   <app-simple-modal title="Matching Sessions" elementId="simple-modal">
     <div class="list-group">
-      <a class="list-group-item" *ngFor="let session of foundSessions" [routerLink]="['/events', session.eventId]">{{session.name}}</a>
+      <a class="list-group-item" *ngFor="let session of foundSessions" [routerLink]="['/events', session.eventId]" (click)="closeModal()">{{session.name}}</a>
     </div>
   </app-simple-modal>
