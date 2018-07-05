@@ -38,7 +38,8 @@ let jQuery = window['$'];
   ],
   providers: [
     EventsService,
-    {provide: TOASTR_TOKEN, useValue: toastr},
+    { provide: TOASTR_TOKEN, useValue: toastr },
+    { provide: JQ_TOKEN, useValue: jQuery },
     EventRouteActivator,
     AuthService,
     { provide: 'canDeactivateCreateEvent', useValue: checkDirtyState }
