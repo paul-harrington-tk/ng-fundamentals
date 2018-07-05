@@ -1,25 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Component } from '@angular/core';
-
-
-import { EventsAppComponent } from './events-app.component';
-import { EventsListComponent} from './events/events-list.component';
-import { EventThumbnailComponent } from './events/event-thumbnail.component';
-import { NavBarComponent } from './nav/nav.component';
-import { EventsService } from './events/shared/events.service';
-import { TOASTR_TOKEN, Toastr } from './common/toastr.service';
-import { EventDetailsComponent } from './events/event-details/event-details.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from '../routes';
-import { CreateEventComponent } from './events/create-event.component';
+import { EventsAppComponent } from './events-app.component';
+import { EventsListComponent, EventThumbnailComponent, CreateEventComponent } from './events';
+import { EventDetailsComponent, SessionListComponent, CreateSessionComponent, EventRouteActivator } from './events/event-details';
+import { NavBarComponent } from './nav/nav.component';
 import { Error404Component } from './errors/404.component';
-import { EventRouteActivator } from './events/event-details/events-route-activator.component';
-import { SessionListComponent } from './events/event-details/session-list.component';
-import { AuthService } from './user/auth.service';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CreateSessionComponent } from './events/event-details/create-session.component';
-import { CollapsableWellComponent } from './common/collapsable-well.component';
-import { DurationPipe } from './events/shared/duration.pipe';
+import { CollapsableWellComponent, Toastr, TOASTR_TOKEN } from './common';
+import { DurationPipe, EventsService } from './events/shared';
+import { AuthService } from './user';
+
 
 declare let toastr: Toastr;
 
