@@ -11,10 +11,11 @@ import { Error404Component } from './errors/404.component';
 import { CollapsableWellComponent, Toastr, TOASTR_TOKEN, JQ_TOKEN, SimpleModalComponent, ModalTriggerDirective } from './common';
 import { DurationPipe, EventsService } from './events/shared';
 import { AuthService } from './user';
+import { UpvoteComponent } from './events/event-details/upvote.component';
 
 
-let toastr: Toastr = window['toastr'];
-let jQuery = window['$'];
+const toastr: Toastr = window['toastr'];
+const jQuery = window['$'];
 
 @NgModule({
   imports: [
@@ -36,8 +37,8 @@ let jQuery = window['$'];
     CollapsableWellComponent,
     DurationPipe,
     SimpleModalComponent,
-    ModalTriggerDirective
-    
+    ModalTriggerDirective,
+    UpvoteComponent
   ],
   providers: [
     EventsService,

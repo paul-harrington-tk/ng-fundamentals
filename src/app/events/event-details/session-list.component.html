@@ -1,15 +1,21 @@
 <div class="row" *ngFor="let session of visibleSessions">
-    <div class="col-md-10">
-      <app-collapsable-well>
-        <div well-title>
-          <h4>{{session.name}}&nbsp;<i class="glyphicon glyphicon-fire" *ngIf="session.voters && session.voters.length > 3" style="color:red;"></i></h4>
-        </div>
-        <div well-body>
-            <h6>{{session.presenter}}</h6>
-            <span>Duration: {{session.duration | duration}}</span><br />
-            <span>Level: {{session.level}}</span>
-            <p>{{session.abstract}}</p>
-        </div>
-      </app-collapsable-well>
-    </div>
+  <div class="col-md-1">
+    <app-upvote (vote)="toggleVote(session)" [count]="session.voters.length" [voted]="userHasVoted(session)"></app-upvote>
   </div>
+  <div class="col-md-10">
+    <app-collapsable-well>
+      <div well-title>
+        <h4>{{session.name}}&nbsp;
+          <i class="glyphicon glyphicon-fire" *ngIf="session.voters && session.voters.length > 3" style="color:red;"></i>
+        </h4>
+      </div>
+      <div well-body>
+        <h6>{{session.presenter}}</h6>
+        <span>Duration: {{session.duration | duration}}</span>
+        <br />
+        <span>Level: {{session.level}}</span>
+        <p>{{session.abstract}}</p>
+      </div>
+    </app-collapsable-well>
+  </div>
+</div>

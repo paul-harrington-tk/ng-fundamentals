@@ -14,9 +14,9 @@ export class SessionListComponent implements OnChanges {
     ngOnChanges() {
         if (this.sessions) {
             this.filterSessions(this.filterBy);
-            this.sortBy === 'votes' ? 
-            this.visibleSessions.sort(sortByVotes) : 
-            this.visibleSessions.sort(sortByNameAsc);
+            this.sortBy === 'votes' ?
+                this.visibleSessions.sort(sortByVotes) :
+                this.visibleSessions.sort(sortByNameAsc);
         }
     }
 
@@ -27,12 +27,24 @@ export class SessionListComponent implements OnChanges {
             this.visibleSessions = this.sessions.filter(s => s.level.toLowerCase() === filter);
         }
     }
+
+    userHasVoted(session): boolean {
+        return false;
+    }
+
+    toggleVote(session): void {
+        return;
+    }
 }
 
 function sortByNameAsc(s1: ISession, s2: ISession) {
-    if (s1.name > s2.name) return 1
-    else if (s1.name === s2.name) return 0
-    else return -1
+    if (s1.name > s2.name) {
+        return 1;
+    } else if (s1.name === s2.name) {
+        return 0;
+    } else {
+        return -1;
+    }
 }
 
 function sortByVotes(s1: ISession, s2: ISession) {
