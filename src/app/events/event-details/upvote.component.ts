@@ -23,5 +23,7 @@ export class UpvoteComponent {
 
     }
 
-
+    onClick() {
+        this.vote.emit({});
+    }
 }

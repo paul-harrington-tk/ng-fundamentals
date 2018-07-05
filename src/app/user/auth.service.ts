@@ -12,7 +12,7 @@ export class AuthService {
 
     login(username: string, password: string) {
         this.currentUser = {
-            userName: 'papa',
+            userName: 'johnpapa',
             name: 'John',
             surname: 'Harris'
         };

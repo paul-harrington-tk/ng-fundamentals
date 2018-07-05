@@ -325,36 +325,40 @@ export class EventsService {
     return this.EVENTS.find(event => event.id === id);
   }
   saveEvent(event: IEvent) {
-    let id = this.EVENTS.sort((a, b) => {
-      if (a.id > b.id) return -1
-      else if (b.id > a.id) return 1
-      else return 0;
-    }).map(event => event.id)[0] + 1;
+    const id = this.EVENTS.sort((a, b) => {
+      if (a.id > b.id) {
+        return -1;
+      } else if (b.id > a.id) {
+        return 1;
+      } else {
+        return 0;
+      }
+    }).map(ev => ev.id)[0] + 1;
     event.id = id;
     event.sessions = [];
     this.EVENTS.push(event);
   }
 
   updateEvent(event: IEvent) {
-    let index = this.EVENTS.findIndex(x => x.id === event.id);
+    const index = this.EVENTS.findIndex(x => x.id === event.id);
     this.EVENTS[index] = event;
   }
 
   searchSessions(searchTerm: string) {
-    let term = searchTerm.toLocaleLowerCase();
+    const term = searchTerm.toLocaleLowerCase();
 
     let results: ISession[] = [];
 
     this.EVENTS.forEach(e => {
       let matchingSessions = e.sessions.filter(s => s.name.toLocaleLowerCase().indexOf(term) > -1);
       matchingSessions = matchingSessions.map((session: any) => {
-        session.eventId = e.id
+        session.eventId = e.id;
         return session;
       });
       results = results.concat(matchingSessions);
     });
 
-    var emitter = new EventEmitter(true);
+    const emitter = new EventEmitter(true);
     setTimeout(() => {
       emitter.emit(results);
     }, 100);

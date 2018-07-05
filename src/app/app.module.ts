@@ -5,13 +5,13 @@ import { RouterModule } from '@angular/router';
 import { appRoutes } from '../routes';
 import { EventsAppComponent } from './events-app.component';
 import { EventsListComponent, EventThumbnailComponent, CreateEventComponent } from './events';
-import { EventDetailsComponent, SessionListComponent, CreateSessionComponent, EventRouteActivator } from './events/event-details';
+import { EventDetailsComponent,
+  SessionListComponent, CreateSessionComponent, EventRouteActivator, UpvoteComponent } from './events/event-details';
 import { NavBarComponent } from './nav/nav.component';
 import { Error404Component } from './errors/404.component';
 import { CollapsableWellComponent, Toastr, TOASTR_TOKEN, JQ_TOKEN, SimpleModalComponent, ModalTriggerDirective } from './common';
-import { DurationPipe, EventsService } from './events/shared';
+import { DurationPipe, EventsService, VoterService } from './events/shared';
 import { AuthService } from './user';
-import { UpvoteComponent } from './events/event-details/upvote.component';
 
 
 const toastr: Toastr = window['toastr'];
@@ -46,6 +46,7 @@ const jQuery = window['$'];
     { provide: JQ_TOKEN, useValue: jQuery },
     EventRouteActivator,
     AuthService,
+    VoterService,
     { provide: 'canDeactivateCreateEvent', useValue: checkDirtyState }
   ],
   bootstrap: [EventsAppComponent]
