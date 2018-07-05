@@ -8,12 +8,13 @@ import { EventsListComponent, EventThumbnailComponent, CreateEventComponent } fr
 import { EventDetailsComponent, SessionListComponent, CreateSessionComponent, EventRouteActivator } from './events/event-details';
 import { NavBarComponent } from './nav/nav.component';
 import { Error404Component } from './errors/404.component';
-import { CollapsableWellComponent, Toastr, TOASTR_TOKEN } from './common';
+import { CollapsableWellComponent, Toastr, TOASTR_TOKEN, JQ_TOKEN } from './common';
 import { DurationPipe, EventsService } from './events/shared';
 import { AuthService } from './user';
 
 
-declare let toastr: Toastr;
+let toastr: Toastr = window['toastr'];
+let jQuery = window['$'];
 
 @NgModule({
   imports: [
