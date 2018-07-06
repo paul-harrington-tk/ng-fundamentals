@@ -12,6 +12,7 @@ import { Error404Component } from './errors/404.component';
 import { CollapsableWellComponent, Toastr, TOASTR_TOKEN, JQ_TOKEN, SimpleModalComponent, ModalTriggerDirective } from './common';
 import { DurationPipe, EventsService, VoterService } from './events/shared';
 import { AuthService } from './user';
+import { LocationValidator } from './events/location-validator.directive';
 
 
 const toastr: Toastr = window['toastr'];
@@ -38,6 +39,7 @@ const jQuery = window['$'];
     DurationPipe,
     SimpleModalComponent,
     ModalTriggerDirective,
+    LocationValidator,
     UpvoteComponent
   ],
   providers: [
