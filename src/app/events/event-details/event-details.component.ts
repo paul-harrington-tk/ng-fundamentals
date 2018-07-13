@@ -13,16 +13,18 @@ import { IEvent, ISession } from '../event.model';
 })
 export class EventDetailsComponent implements OnInit {
     event: IEvent;
-    addMode: boolean = false;
-    filterBy: string = 'all';
-    sortBy: string = 'votes';
+    addMode = false;
+    filterBy = 'all';
+    sortBy = 'votes';
     constructor(private eventService: EventsService, private route: ActivatedRoute) {
     }
 
     ngOnInit() {
         this.route.params.forEach((params: Params) => {
-            this.event = this.eventService.getEvent(+params['id']);
-            this.addMode = false;
+            this.eventService.getEvent(+params['id']).subscribe((event) => {
+                this.event = event;
+                this.addMode = false;
+            });
         });
     }
 
