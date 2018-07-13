@@ -334,13 +334,13 @@ export class EventsService {
     .pipe(catchError(this.handleError<IEvent>('getEvent')));
   }
   saveEvent(event: IEvent): Observable<IEvent> {
-    const options = { headers: new HttpHeaders({'Content-Type': 'application/json'}) };
+    const options = { headers: this.newHeaders() };
     return this.http.post<IEvent>('/api/events', event, options)
     .pipe(this.handleError('saveEvent', event));
   }
 
   updateEvent(event: IEvent) {
-    const options = { headers: new HttpHeaders({'Content-Type': 'application/json'}) };
+    const options = { headers: this.newHeaders() };
     return this.http.put<IEvent>('/api/events', event, options)
     .pipe(this.handleError('updateEvent', event));
   }
@@ -352,6 +352,7 @@ export class EventsService {
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
+      console.log(operation + ': failed');
       if (error.constructor.name === 'Observable') {
         error.subscribe((data) => {
           console.log(data);
@@ -362,5 +363,9 @@ export class EventsService {
 
       return of(result as T);
     };
+  }
+
+  private newHeaders(): HttpHeaders {
+    return new HttpHeaders({'Content-Type': 'application/json'});
   }
 }

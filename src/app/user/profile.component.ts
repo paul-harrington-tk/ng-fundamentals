@@ -17,8 +17,8 @@ import { TOASTR_TOKEN, Toastr } from '../common/toastr.service';
 })
 export class ProfileComponent implements OnInit {
     profileForm: FormGroup;
-    constructor(private authService: AuthService, 
-        private router: Router, 
+    constructor(private authService: AuthService,
+        private router: Router,
         @Inject(TOASTR_TOKEN) private toastr: Toastr) {
 
     }
@@ -27,28 +27,37 @@ export class ProfileComponent implements OnInit {
             this.router.navigate(['/user/login']);
             return;
         }
-        let firstName = new FormControl(this.authService.currentUser.name, [Validators.required, Validators.pattern('[a-zA-Z].*')]);
-        let lastName = new FormControl(this.authService.currentUser.surname, [Validators.required, Validators.pattern('[a-zA-Z].*')]);
+        const firstName = new FormControl(this.authService.currentUser.name, [Validators.required, Validators.pattern('[a-zA-Z].*')]);
+        const lastName = new FormControl(this.authService.currentUser.surname, [Validators.required, Validators.pattern('[a-zA-Z].*')]);
 
         this.profileForm = new FormGroup({
             firstName: firstName,
             lastName: lastName
-        })
+        });
     }
 
     validateFirstName(): boolean {
         return this.profileForm.controls.firstName.valid || this. profileForm.controls.firstName.untouched;
     }
+
     validateLastName(): boolean {
        return this.profileForm.controls.lastName.valid || this.profileForm.controls.lastName.untouched;
     }
+
     saveProfile(formValues) {
         if (this.profileForm.valid) {
             this.authService.updateCurrentUser(formValues.firstName, formValues.lastName);
-            this.toastr.success("Profile Updated");
+            this.toastr.success('Profile Updated');
         }
     }
+
     cancel() {
         this.router.navigate(['/events']);
+    }
+
+    logout() {
+        this.authService.logout().subscribe(() => {
+            this.router.navigate(['/user/login']);
+        });
     }
 }
