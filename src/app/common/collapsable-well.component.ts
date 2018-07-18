@@ -9,9 +9,9 @@ import { Component, Input } from '@angular/core';
     </div>
     `
 })
-export class CollapsableWellComponent{
+export class CollapsableWellComponent {
     @Input() title: string;
-    visible:boolean = true;
+    visible = true;
 
     toggleContent() {
         this.visible = !this.visible;

@@ -1,6 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
-import { FormControl, Validators, FormGroup } from "@angular/forms";
-import { ISession } from "../event.model";
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { ISession } from '../event.model';
 import { restrictedWords} from '../shared/restricted-words.validator';
 
 @Component({
@@ -41,10 +41,10 @@ export class CreateSessionComponent implements OnInit {
         });
     }
     presenterInvalid(): boolean {
-        return this.presenter.invalid && (this.presenter.dirty || this.presenter.touched)
+        return this.presenter.invalid && (this.presenter.dirty || this.presenter.touched);
     }
     nameInvalid(): boolean {
-        return this.name.invalid && (this.name.dirty || this.name.touched)
+        return this.name.invalid && (this.name.dirty || this.name.touched);
     }
 
     levelInvalid(): boolean {
@@ -58,9 +58,9 @@ export class CreateSessionComponent implements OnInit {
     abstractInvalid(): boolean {
         return this.abstract.invalid && (this.abstract.dirty || this.abstract.touched);
     }
-   
+
     saveSession(formValues) {
-        let session: ISession = {
+        const session: ISession = {
             id: undefined,
             name: formValues.name,
             presenter: formValues.presenter,
@@ -68,7 +68,7 @@ export class CreateSessionComponent implements OnInit {
             level: formValues.level,
             abstract: formValues.abstract,
             voters: []
-        }
+        };
         this.saveNewSession.emit(session);
     }
 
